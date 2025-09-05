@@ -3,6 +3,7 @@ import { Product as ProductType } from "@/utils/mock";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { ThemedText } from "../ThemedText";
 import { ThemedView } from "../ThemedView";
+import Card from "../common/Card";
 
 interface ProductItemProps {
   product: ProductType;
@@ -21,7 +22,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
   };
 
   return (
-    <ThemedView style={styles.row}>
+    <Card>
       <ThemedView style={styles.productInfo}>
         <ThemedText style={styles.title}>{product.title}</ThemedText>
         <ThemedText style={styles.price}>₹ {product.price}</ThemedText>
@@ -34,26 +35,13 @@ const ProductItem = ({ product }: ProductItemProps) => {
           {inCart ? 'Remove' : 'Add to Cart'}
         </ThemedText>
       </TouchableOpacity>
-    </ThemedView>
+    </Card>
   );
 };
 
 export default ProductItem;
 
 const styles = StyleSheet.create({
-  row: {
-    height: 80,
-    paddingHorizontal: 16,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "white",
-    marginVertical: 2,
-    borderRadius: 8,
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
-  },
   productInfo: {
     flex: 1,
     flexDirection: "column",
@@ -82,7 +70,6 @@ const styles = StyleSheet.create({
     fontSize: 16, 
     fontWeight: "600",
     marginBottom: 4,
-    color: "#333",
   },
   price: { 
     fontSize: 14, 

@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { ThemedText } from './ThemedText';
 import { ThemedView } from './ThemedView';
+import Card from './common/Card';
 
 interface User {
   id: number;
@@ -19,10 +20,10 @@ interface UserCardProps {
 const UserCard: React.FC<UserCardProps> = ({ user, index, onPress }) => {
   return (
     <TouchableOpacity 
-      style={styles.card} 
       onPress={() => onPress(user.id)}
       activeOpacity={0.7}
     >
+      <Card>
       <ThemedView style={styles.leftSection}>
         <ThemedView style={styles.serialNumber}>
           <ThemedText style={styles.serialNumberText}>{index + 1}</ThemedText>
@@ -36,22 +37,13 @@ const UserCard: React.FC<UserCardProps> = ({ user, index, onPress }) => {
       <ThemedView style={styles.rightSection}>
         <Ionicons name="chevron-forward" size={20} color="#666" />
       </ThemedView>
+      
+      </Card>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: 'white',
-    padding: 16,
-    marginVertical: 4,
-    marginHorizontal: 16,
-    borderRadius: 12,
-    elevation: 3,
-  },
   leftSection: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -79,7 +71,6 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#333',
     marginBottom: 2,
   },
   userEmail: {

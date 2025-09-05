@@ -1,3 +1,4 @@
+import Card from '@/components/common/Card'
 import { ThemedText } from '@/components/ThemedText'
 import { ThemedView } from '@/components/ThemedView'
 import useCartStore from '@/stores/CartStore'
@@ -21,7 +22,7 @@ const Cart = () => {
   
 
   const renderCartItem = ({ item }: { item: any }) => (
-    <ThemedView style={styles.cartItem}>
+    <Card>
       <ThemedView style={styles.itemInfo}>
         <ThemedText style={styles.itemTitle}>{item.title}</ThemedText>
         <ThemedText style={styles.itemPrice}>₹ {item.price}</ThemedText>
@@ -33,7 +34,7 @@ const Cart = () => {
       >
         <ThemedText style={styles.removeButtonText}>Remove</ThemedText>
       </TouchableOpacity>
-    </ThemedView>
+    </Card>
   );
 
   if (products.length === 0) {
@@ -78,28 +79,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    borderBottomWidth: 1,
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  clearButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    backgroundColor: '#ff4444',
-    borderRadius: 6,
-  },
-  clearButtonText: {
-    fontSize: 14,
-    fontWeight: '600',
-  },
   emptyCart: {
     flex: 1,
     justifyContent: 'center',
@@ -118,23 +97,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
   },
-  cartItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 15,
-    marginVertical: 5,
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
-  },
   itemInfo: {
     flex: 1,
+    backgroundColor: 'transparent'
   },
   itemTitle: {
     fontSize: 16,
