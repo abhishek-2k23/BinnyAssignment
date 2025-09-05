@@ -5,7 +5,6 @@ interface CartState {
   products: Product[];
   addProduct: (product: Product) => void;
   removeProduct: (productId: string) => void;
-  clearCart: () => void;
   getTotalPrice: () => number;
   getTotalItems: () => number;
   isInCart: (productId: string) => boolean;
@@ -26,10 +25,6 @@ const useCartStore = create<CartState>((set, get) => ({
   removeProduct: (productId: string) =>
     set((state) => ({
       products: state.products.filter((p) => p.id !== productId),
-    })),
-  clearCart: () =>
-    set(() => ({
-      products: [],
     })),
   getTotalPrice: () => {
     const state = get();

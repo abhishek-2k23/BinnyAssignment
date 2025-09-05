@@ -3,10 +3,9 @@ import { ThemedView } from '@/components/ThemedView'
 import useCartStore from '@/stores/CartStore'
 import React from 'react'
 import { Alert, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Cart = () => {
-  const { products, removeProduct, clearCart, getTotalPrice, getTotalItems } = useCartStore();
+  const { products, removeProduct,  getTotalPrice, getTotalItems } = useCartStore();
 
   const handleRemoveItem = (productId: string) => {
     Alert.alert(
@@ -19,16 +18,7 @@ const Cart = () => {
     );
   };
 
-  const handleClearCart = () => {
-    Alert.alert(
-      'Clear Cart',
-      'Are you sure you want to remove all items from your cart?',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Clear', style: 'destructive', onPress: clearCart }
-      ]
-    );
-  };
+  
 
   const renderCartItem = ({ item }: { item: any }) => (
     <ThemedView style={styles.cartItem}>
@@ -58,13 +48,7 @@ const Cart = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ThemedView style={styles.header}>
-        <ThemedText style={styles.headerTitle}>Shopping Cart</ThemedText>
-        <TouchableOpacity onPress={handleClearCart} style={styles.clearButton}>
-          <ThemedText style={styles.clearButtonText}>Clear All</ThemedText>
-        </TouchableOpacity>
-      </ThemedView>
+    <ThemedView style={styles.container}>
 
       <FlatList
         data={products}
@@ -86,7 +70,7 @@ const Cart = () => {
           <ThemedText style={styles.checkoutButtonText}>Proceed to Checkout</ThemedText>
         </TouchableOpacity>
       </ThemedView>
-    </SafeAreaView>
+    </ThemedView>
   );
 };
 

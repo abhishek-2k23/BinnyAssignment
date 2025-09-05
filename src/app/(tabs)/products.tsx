@@ -1,8 +1,6 @@
 import { FlatList, StyleSheet } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
 
 import ProductItem from "@/components/product/index"
-import { ThemedText } from "@/components/ThemedText"
 import { ThemedView } from "@/components/ThemedView"
 import useProducts from "@/hooks/useProducts"
 import { Product as mockProductData } from "@/utils/mock"
@@ -17,8 +15,7 @@ export default function Products() {
     [],
   )
   return (
-    <SafeAreaView style={{ flex: 1, paddingHorizontal: 5}}>
-      <ThemedText>All Products: </ThemedText>
+    <ThemedView style={{ flex: 1, paddingHorizontal: 5}}>
       <FlatList
         data={visible}
         keyExtractor={(item) => item.id}
@@ -35,7 +32,7 @@ export default function Products() {
         }}
         ItemSeparatorComponent={() => <ThemedView style={styles.sep} />}
       />
-    </SafeAreaView>
+    </ThemedView>
   )
 }
 
