@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "device-os-module": ["../src/index"],
+      "device-os-module/*": ["../src/*"]
+    }
+  }
+}
