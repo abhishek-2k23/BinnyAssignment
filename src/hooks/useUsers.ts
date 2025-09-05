@@ -58,7 +58,7 @@ const useUsers = () => {
   }, []);
 
   const handleUserPress = (userId: number) => {
-    router.push(`/(users)/${userId}` as any);
+    router.push(`/user/${userId}` as any);
   };
 
   useEffect(() => {
@@ -92,7 +92,6 @@ const useUsers = () => {
     setLoading(true);
     try {
       const data = await fetchUsers();
-      console.log('users: ', data);
       setUsers(data);
       setIsOffline(false);
     } catch (error) {
