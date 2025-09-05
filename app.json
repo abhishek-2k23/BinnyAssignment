@@ -3,14 +3,16 @@
     "name": "myapp",
     "slug": "myapp",
     "version": "1.0.0",
-    "orientation": "automatic",
+    "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "linking": {
       "scheme": "myapp",
-      "prefixes": ["myapp://"]
+      "prefixes": [
+        "myapp://"
+      ]
     },
     "ios": {
       "supportsTablet": true
@@ -20,7 +22,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.iamabhishek01.myapp"
     },
     "web": {
       "bundler": "metro",
