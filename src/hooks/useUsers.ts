@@ -1,7 +1,8 @@
 import { fetchUserDetails, fetchUsers } from "@/utils/api";
+import { CACHE_KEYS, getCachedData, initializeNetworkStatus, setNetworkStatus } from "@/utils/cache";
+import NetInfo from '@react-native-community/netinfo';
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-
 
 interface User {
     id: number;
@@ -28,31 +29,92 @@ interface User {
   }
 const useUsers = () => {
     const [users, setUsers] = useState<any[]>([]);
+    const [isOffline, setIsOffline] = useState(false);
     
   const { id } = useLocalSearchParams();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  // Network status listener
+  useEffect(() => {
+    // Initialize network status
+    initializeNetworkStatus().then((isOnline) => {
+      setIsOffline(!isOnline);
+    });
+
+    // Add network status listener
+    const unsubscribe = NetInfo.addEventListener(state => {
+      const isOnline = state.isConnected ?? true;
+      setNetworkStatus(isOnline);
+      setIsOffline(!isOnline);
+      console.log('Network status changed:', isOnline ? 'Online' : 'Offline');
+    });
+
+    // Cleanup listener on unmount
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   const handleUserPress = (userId: number) => {
     router.push(`/(users)/${userId}` as any);
   };
 
   useEffect(() => {
-    setLoading(true);
-    fetchUserDetails(id as unknown as number).then((data) => {
-      setUser(data);
-      setLoading(false);
-    });
+    const loadUserDetails = async () => {
+      setLoading(true);
+      try {
+        const data = await fetchUserDetails(id as unknown as number);
+        setUser(data);
+        setIsOffline(false);
+      } catch (error) {
+        console.log("Error fetching user details:", error);
+        // If fetch fails, try to get cached data
+        const cachedData = await getCachedData(CACHE_KEYS.USER_DETAILS(id as unknown as number));
+        if (cachedData) {
+          setUser(cachedData);
+          setIsOffline(true);
+        } else {
+          setUser(null);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      loadUserDetails();
+    }
   }, [id]);
-    useEffect(() => {
-        setLoading(true);
-        fetchUsers().then((data) => {
-            console.log('users: ', data);
-            setUsers(data);
-            setLoading(false);
-        });
-    }, [])
-    return { users, user, loading, handleUserPress };
+
+  const loadUsers = async () => {
+    setLoading(true);
+    try {
+      const data = await fetchUsers();
+      console.log('users: ', data);
+      setUsers(data);
+      setIsOffline(false);
+    } catch (error) {
+      console.log("Error fetching users:", error);
+      // If fetch fails, try to get cached data
+      const cachedData = await getCachedData(CACHE_KEYS.USERS_LIST);
+      if (cachedData) {
+        console.log('Using cached users data');
+        setUsers(cachedData);
+        setIsOffline(true);
+      } else {
+        setUsers([]);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
+  return { users, user, loading, isOffline, handleUserPress };
 }
 export default useUsers;

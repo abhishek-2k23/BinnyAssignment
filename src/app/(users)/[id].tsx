@@ -9,7 +9,7 @@ import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 
 const UserDetailsScreen = () => {
-  const {loading, user} = useUsers();
+  const {loading, user, isOffline} = useUsers();
   if (loading) {
     return (
       <Loading />
@@ -29,6 +29,12 @@ const UserDetailsScreen = () => {
 
   return (
     <ThemedView style={styles.container}>
+      {isOffline && (
+        <ThemedView style={styles.offlineBanner}>
+          <Ionicons name="cloud-offline" size={16} color="#FF6B6B" />
+          <ThemedText style={styles.offlineText}>Showing cached data (offline)</ThemedText>
+        </ThemedView>
+      )}
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         <ThemedView style={styles.profileSection}>
           <ThemedView style={styles.avatar}>
@@ -94,6 +100,22 @@ const UserDetailsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  offlineBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFF3CD',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#FFEAA7',
+  },
+  offlineText: {
+    marginLeft: 8,
+    fontSize: 14,
+    color: '#856404',
+    fontWeight: '500',
   },
   errorContainer: {
     flex: 1,
