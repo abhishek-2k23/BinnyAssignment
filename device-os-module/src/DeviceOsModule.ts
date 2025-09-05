@@ -1,8 +1,8 @@
 import { requireNativeModule } from 'expo-modules-core';
 import { DeviceOsModuleType } from './DeviceOsModule.types';
 
-const DeviceOSModule = requireNativeModule<DeviceOsModuleType>('DeviceOSModule');
+const DeviceOsModule = requireNativeModule<DeviceOsModuleType>('DeviceOsModule');
 
 export function getOS(): string {
-  return DeviceOSModule.getOS();
+  return DeviceOsModule.getOS();
 }
