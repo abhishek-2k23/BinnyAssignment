@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "myapp",
-    "slug": "myapp",
+    "slug": "binny",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/images/icon.png",
@@ -45,6 +45,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "08c49b29-5288-4836-b567-2ebc12be2fbd"
+      }
+    },
+    "owner": "iamabhishek01"
   }
 }
