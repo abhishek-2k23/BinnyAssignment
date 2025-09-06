@@ -5,21 +5,21 @@ export const useAuthToken = () => {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const loadToken = async () => {
+    try {
+      setLoading(true);
+      const authToken = await initializeToken();
+      setToken(authToken);
+    } catch (error) {
+      console.error('Error loading token:', error);
+      setToken(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   // Initialize token
   useEffect(() => {
-    const loadToken = async () => {
-      try {
-        setLoading(true);
-        const authToken = await initializeToken();
-        setToken(authToken);
-      } catch (error) {
-        console.error('Error loading token:', error);
-        setToken(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     loadToken();
   }, []);
 

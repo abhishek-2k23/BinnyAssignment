@@ -19,7 +19,7 @@ export const setNetworkStatus = (status: boolean) => {
   isOnline = status;
 };
 
-// Simple cache utility functions
+// to cache data
 export const cacheData = async (key: string, data: any): Promise<void> => {
   try {
     await AsyncStorage.setItem(key, JSON.stringify(data));
@@ -35,14 +35,6 @@ export const getCachedData = async (key: string): Promise<any | null> => {
   } catch (error) {
     console.error('Error retrieving cached data:', error);
     return null;
-  }
-};
-
-export const clearCache = async (key: string): Promise<void> => {
-  try {
-    await AsyncStorage.removeItem(key);
-  } catch (error) {
-    console.error('Error clearing cache:', error);
   }
 };
 

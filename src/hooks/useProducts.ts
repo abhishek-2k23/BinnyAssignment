@@ -9,6 +9,7 @@ const useProducts = () => {
   const [visible, setVisible] = useState<Product[]>(() =>
     allData.slice(0, PAGE_SIZE),
   )
+  
   const loadingRef = useRef(false)
 
   const loadMore = useCallback(() => {
