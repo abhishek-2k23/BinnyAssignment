@@ -1,25 +1,14 @@
 import Card from '@/components/common/Card'
 import { ThemedText } from '@/components/ThemedText'
 import { ThemedView } from '@/components/ThemedView'
+import useCart from '@/hooks/useCart'
 import useCartStore from '@/stores/CartStore'
 import React from 'react'
-import { Alert, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
+import { FlatList, StyleSheet, TouchableOpacity } from 'react-native'
 
 const Cart = () => {
-  const { products, removeProduct,  getTotalPrice, getTotalItems } = useCartStore();
-
-  const handleRemoveItem = (productId: string) => {
-    Alert.alert(
-      'Remove Item',
-      'Are you sure you want to remove this item from your cart?',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Remove', style: 'destructive', onPress: () => removeProduct(productId) }
-      ]
-    );
-  };
-
-  
+  const { products, getTotalPrice, getTotalItems } = useCartStore();
+  const {handleCheckout, handleRemoveItem} = useCart();
 
   const renderCartItem = ({ item }: { item: any }) => (
     <Card>
@@ -67,7 +56,7 @@ const Cart = () => {
           </ThemedView>
         </ThemedView>
         
-        <TouchableOpacity style={styles.checkoutButton}>
+        <TouchableOpacity style={styles.checkoutButton} onPress={handleCheckout}>
           <ThemedText style={styles.checkoutButtonText}>Proceed to Checkout</ThemedText>
         </TouchableOpacity>
       </ThemedView>

@@ -145,7 +145,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#333',
   },
   backButton: {
     padding: 8,
@@ -182,7 +181,6 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 4,
   },
   username: {
@@ -210,7 +208,6 @@ const styles = StyleSheet.create({
   },
   detailValue: {
     fontSize: 16,
-    color: '#333',
     fontWeight: '500',
   },
   section: {
@@ -220,7 +217,6 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 12,
     paddingHorizontal: 20,
   },
@@ -229,7 +225,6 @@ const styles = StyleSheet.create({
   },
   addressText: {
     fontSize: 16,
-    color: '#333',
     marginBottom: 4,
   },
   companyCard: {
@@ -238,7 +233,6 @@ const styles = StyleSheet.create({
   companyName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 8,
   },
   companyCatchPhrase: {
