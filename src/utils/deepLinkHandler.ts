@@ -2,7 +2,7 @@ import { router } from 'expo-router';
 
 // Simple deep link navigation function
 export const navigateToUser = (userId: string) => {
-  const route = `/user/${userId}` as any;
+  const route = `/user/${userId}` as const;
   console.log('navigateToUser called with userId:', userId, 'route:', route);
   router.push(route);
 };

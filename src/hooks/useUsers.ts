@@ -58,7 +58,14 @@ const useUsers = () => {
   }, []);
 
   const handleUserPress = (userId: number) => {
-    router.push(`/user/${userId}` as any);
+    console.log('user pressed: ', userId);
+    const route = `/user/${userId}` as const;
+    console.log('Navigating to route:', route);
+    try {
+      router.push(route);
+    } catch (error) {
+      console.error('Navigation error:', error);
+    }
   };
 
   useEffect(() => {

@@ -18,9 +18,13 @@ interface UserCardProps {
 }
 
 const UserCard: React.FC<UserCardProps> = ({ user, index, onPress }) => {
+  const handlePress = () => {
+    onPress(user.id);
+  };
+
   return (
     <TouchableOpacity 
-      onPress={() => onPress(user.id)}
+      onPress={handlePress}
       activeOpacity={0.7}
     >
       <Card>
