@@ -3,13 +3,19 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import useUsers from '@/hooks/useUsers';
 import { Ionicons } from '@expo/vector-icons';
-import { router } from 'expo-router';
-import React from 'react';
+import { router, useLocalSearchParams } from 'expo-router';
+import React, { useEffect } from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 
 const UserDetailsScreen = () => {
+  const params = useLocalSearchParams();
+  console.log('UserDetailsScreen - Route params:', params);
+  
   const {loading, user, isOffline} = useUsers();
+  
+  useEffect(() => {
+  }, [params]);
   if (loading) {
     return (
       <Loading />

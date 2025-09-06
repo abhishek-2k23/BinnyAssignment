@@ -32,6 +32,7 @@ const useUsers = () => {
     const [isOffline, setIsOffline] = useState(false);
     
   const { id } = useLocalSearchParams();
+  console.log('useUsers hook - id parameter:', id, 'type:', typeof id);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -61,11 +62,24 @@ const useUsers = () => {
     console.log('user pressed: ', userId);
     const route = `/user/${userId}` as const;
     console.log('Navigating to route:', route);
-    try {
-      router.push(route);
-    } catch (error) {
-      console.error('Navigation error:', error);
-    }
+    
+    // Add a small delay to ensure router is ready
+    setTimeout(() => {
+      try {
+        console.log('Attempting router.push...');
+        router.push(route);
+        console.log('router.push completed');
+      } catch (error) {
+        console.error('Navigation error:', error);
+        // Fallback navigation method
+        try {
+          console.log('Trying router.navigate as fallback...');
+          router.navigate(route);
+        } catch (fallbackError) {
+          console.error('Fallback navigation also failed:', fallbackError);
+        }
+      }
+    }, 100);
   };
 
   useEffect(() => {
